@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
@@ -23,7 +24,7 @@ public class SecondForm extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.second_form);
-        ImageButton next= (ImageButton) findViewById(R.id.buttonEmail);
+        Button next= (Button) findViewById(R.id.button);
          radioButtonAndroid= (RadioButton) findViewById(R.id.radio_android);
          radioButtonIos = (RadioButton) findViewById(R.id.radio_ios);
          radioGroup=(RadioGroup) findViewById(R.id.radio);
@@ -35,7 +36,7 @@ public class SecondForm extends Activity {
         problem.setOnTouchListener(new View.OnTouchListener() {
 
             public boolean onTouch(View view, MotionEvent event) {
-                // TODO Auto-generated method stub
+
                 if (view.getId() ==R.id.problem) {
                     view.getParent().requestDisallowInterceptTouchEvent(true);
                     switch (event.getAction()&MotionEvent.ACTION_MASK){
