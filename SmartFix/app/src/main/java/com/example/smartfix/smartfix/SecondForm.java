@@ -1,5 +1,6 @@
 package com.example.smartfix.smartfix;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,7 +12,7 @@ import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-public class SecondForm extends AppCompatActivity {
+public class SecondForm extends Activity {
 
     Boolean isAndroid=false;
     String text;
