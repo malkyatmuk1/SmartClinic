@@ -7,5 +7,6 @@
     <color name="indigo">#3ca8b4</color>
     <color name="pink">#ff0095</color>
     <color name="black">#000000</color>
-    <color name="grey">#c4c3c3</color>
+    <color name="grey">#545151</color>
+    <color name="white">#ffffff</color>
 </resources>
