@@ -103,11 +103,22 @@
         android:imeOptions="actionDone"
         android:background="@drawable/border"
         />
+    <CheckBox
+        style="@android:style/Widget.CompoundButton.CheckBox"
+        android:theme="@android:style/Theme.Material"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="use current location"
+        android:checked="true"
+        android:layout_marginTop="10sp"
+
+        />
     <Button
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:id="@+id/button"
-        android:text="Sent"
+        android:text="Send"
+        android:background="@drawable/background_button"
 
         style="@android:style/Widget.Holo.Light.Button.Borderless.Small"
         android:theme="@android:style/Theme.Holo.Light"
