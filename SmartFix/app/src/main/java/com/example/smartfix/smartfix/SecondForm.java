@@ -20,6 +20,7 @@ public class SecondForm extends Activity {
     EditText problem,model;
     RadioGroup radioGroup;
     RadioButton radioButtonAndroid,radioButtonIos;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +66,8 @@ public class SecondForm extends Activity {
 
         }
     };
+
+
     public void composeEmail(String address, String subject, String text) {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("message/refc822");
