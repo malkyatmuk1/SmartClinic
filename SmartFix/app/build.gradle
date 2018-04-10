@@ -27,8 +27,11 @@ allprojects {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    implementation 'com.google.android.gms:play-services-location:+'
+    implementation 'com.google.android.gms:play-services-maps:+'
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:26.0.0'
     implementation 'com.android.support:design:26.0.0'
     implementation 'com.android.support:support-v4:26.0.0'
@@ -39,3 +42,14 @@ dependencies {
     implementation 'com.sun.mail:android-mail:1.5.5'
     implementation 'com.sun.mail:android-activation:1.5.5'
 }
+
+    configurations.all {
+        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+            def requested = details.requested
+            if (requested.group == 'com.android.support') {
+                if (!requested.name.startsWith("multidex")) {
+                    details.useVersion '26.0.0'
+                }
+            }
+        }
+    }
