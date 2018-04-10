@@ -24,8 +24,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Form" />
-        <activity android:name=".SecondForm"/>
+        <activity android:name=".Form"
+                  android:theme="@style/Theme.AppCompat"
+            />
+        <activity android:name=".SecondForm"
+                  android:theme="@style/Theme.AppCompat"
+            />
     </application>
 
 </manifest>
