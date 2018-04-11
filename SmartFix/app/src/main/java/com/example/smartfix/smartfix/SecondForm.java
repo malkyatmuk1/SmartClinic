@@ -57,7 +57,7 @@ public class SecondForm extends AppCompatActivity implements LocationListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.second_form);
         Button next = (Button) findViewById(R.id.button);
-        Button back= (Button) findViewById(R.id.buttonBack);
+        ImageButton back= (ImageButton) findViewById(R.id.buttonBack);
         radioButtonAndroid = (RadioButton) findViewById(R.id.radio_android);
         radioButtonIos = (RadioButton) findViewById(R.id.radio_ios);
         radioGroup = (RadioGroup) findViewById(R.id.radio);
