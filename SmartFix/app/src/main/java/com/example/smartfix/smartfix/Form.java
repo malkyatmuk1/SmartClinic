@@ -20,6 +20,10 @@ public class Form extends Activity {
         Button next= (Button) findViewById(R.id.button);
         name= (EditText) findViewById(R.id.name);
         number= (EditText) findViewById(R.id.number);
+        email= (EditText) findViewById(R.id.email);
+        if(Global.name!=null) name.setText(Global.name.toString());
+        if(Global.phone!=null) number.setText(Global.phone.toString());
+        if(Global.email!=null) email.setText(Global.email);
         next.setOnClickListener(nextListener);
 
     }
@@ -27,6 +31,9 @@ public class Form extends Activity {
 
         public void onClick(View view) {
             Intent i= new Intent(Form.this,SecondForm.class);
+            if(name!=null) Global.name=name.getText().toString();
+            if(email!=null)Global.email=email.getText().toString();
+            if(number!=null)Global.phone=number.getText().toString();
             startActivity(i);
             finish();
 

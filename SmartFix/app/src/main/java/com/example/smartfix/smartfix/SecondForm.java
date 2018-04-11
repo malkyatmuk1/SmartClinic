@@ -55,6 +55,7 @@ public class SecondForm extends AppCompatActivity implements LocationListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.second_form);
         Button next = (Button) findViewById(R.id.button);
         ImageButton back= (ImageButton) findViewById(R.id.buttonBack);
@@ -63,6 +64,10 @@ public class SecondForm extends AppCompatActivity implements LocationListener {
         radioGroup = (RadioGroup) findViewById(R.id.radio);
         problem = (EditText) findViewById(R.id.problem);
         model = (EditText) findViewById(R.id.model);
+        if(Global.problem!=null) problem.setText(Global.problem.toString());
+        if(Global.model!=null) problem.setText(Global.model.toString());
+        if(Global.os!=null && Global.os==true) radioButtonAndroid.setChecked(true);
+        else radioButtonIos.setChecked(true);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         next.setOnClickListener(emailListener);
         back.setOnClickListener(backListener);
@@ -75,6 +80,8 @@ public class SecondForm extends AppCompatActivity implements LocationListener {
         @Override
         public void onClick(View v) {
             Intent i = new Intent(SecondForm.this, Form.class);
+            Global.model=model.getText().toString();
+            Global.problem=problem.getText().toString();
             startActivity(i);
             finish();
         }
@@ -135,10 +142,12 @@ public class SecondForm extends AppCompatActivity implements LocationListener {
             case R.id.radio_android:
                 if (checked)
                     isAndroid = true;
+                Global.os=true;
                 break;
             case R.id.radio_ios:
                 if (checked)
                     isAndroid = false;
+                Global.os=true;
                 break;
         }
     }
