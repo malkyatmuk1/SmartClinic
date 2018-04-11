@@ -29,10 +29,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".Form"
-                  android:theme="@style/Theme.AppCompat"
+                  android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             />
         <activity android:name=".SecondForm"
-                  android:theme="@style/Theme.AppCompat"
+                  android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             />
 
 

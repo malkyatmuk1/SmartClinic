@@ -16,6 +16,10 @@
         <item name="colorControlNormal">@color/indigo</item>
         <item name="colorControlActivated">@color/pink</item>
     </style>
-
+    <style name="MyRaidoButton" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="colorAccent">#ffffff</item>
+        <item name="android:textColorPrimaryDisableOnly">#f44336</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat</item>
+    </style>
 
 </resources>
