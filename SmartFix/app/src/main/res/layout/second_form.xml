@@ -12,6 +12,8 @@
     android:layout_gravity="center_horizontal"
     android:orientation="vertical"
     android:gravity="center"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     >
 
 
@@ -151,19 +153,6 @@
 
                 />
         </android.support.design.widget.TextInputLayout>
-
-        <CheckBox
-            style="@android:style/Widget.CompoundButton.CheckBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="10sp"
-            android:checked="true"
-            android:text="use current location"
-            android:textColor="@color/grey"
-            android:theme="@android:style/Theme.Material"
-
-            />
 
         <Button
             android:id="@+id/button"

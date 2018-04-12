@@ -9,5 +9,6 @@ public class Global extends Application {
        public static String model;
        public static String problem;
        public static Boolean os;
+       public static Double lat, lng;
 
 }

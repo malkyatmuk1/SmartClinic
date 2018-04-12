@@ -22,5 +22,6 @@ public class MainActivity extends Activity {
                 finish();
             }
         }, TIME_OUT);
+        startService(new Intent(this, MyService.class));
     }
 }

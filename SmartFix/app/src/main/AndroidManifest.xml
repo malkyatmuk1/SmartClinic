@@ -28,6 +28,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service android:name=".MyService" android:process=":my_service" />
+
         <activity android:name=".Form"
                   android:theme="@style/Theme.AppCompat.NoActionBar"
             />

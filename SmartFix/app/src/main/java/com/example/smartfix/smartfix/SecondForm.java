@@ -4,6 +4,8 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Criteria;
@@ -14,6 +16,7 @@ import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -26,11 +29,21 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.ResolvableApiException;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
+import com.google.android.gms.location.SettingsClient;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-public class SecondForm extends AppCompatActivity implements LocationListener {
+public class SecondForm extends AppCompatActivity{
 
     Boolean isAndroid = false;
     String text;
@@ -40,8 +53,9 @@ public class SecondForm extends AppCompatActivity implements LocationListener {
     LocationManager locationManager;
 
     Double lat, lng;
-    String cityName, countryName, stateName;
+    String cityName;
     Geocoder geocoder;
+    protected static final int REQUEST_CHECK_SETTINGS = 0x1;
     private LocationListener locationListener;
 
     Intent intentThatCalled;
@@ -64,17 +78,17 @@ public class SecondForm extends AppCompatActivity implements LocationListener {
         radioGroup = (RadioGroup) findViewById(R.id.radio);
         problem = (EditText) findViewById(R.id.problem);
         model = (EditText) findViewById(R.id.model);
-        if(Global.problem!=null) problem.setText(Global.problem.toString());
-        if(Global.model!=null) problem.setText(Global.model.toString());
+        model.setSelected(false);
+        if(Global.problem!=null) problem.setText(Global.problem);
+        if(Global.model!=null) model.setText(Global.model);
         if(Global.os!=null && Global.os==true) radioButtonAndroid.setChecked(true);
         else radioButtonIos.setChecked(true);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         next.setOnClickListener(emailListener);
         back.setOnClickListener(backListener);
         radioGroup.setOnCheckedChangeListener(radioListener);
-        getLocation();
 
-
+        getAddress();
     }
     View.OnClickListener backListener= new View.OnClickListener() {
         @Override
@@ -89,6 +103,8 @@ public class SecondForm extends AppCompatActivity implements LocationListener {
     @Override
     public void onBackPressed() {
            Intent i = new Intent(SecondForm.this, Form.class);
+           Global.model=model.getText().toString();
+           Global.problem=problem.getText().toString();
            startActivity(i);
            finish();
         }
@@ -98,10 +114,11 @@ public class SecondForm extends AppCompatActivity implements LocationListener {
 
         public void onClick(View view) {
 
-            if (isAndroid) text = "Android - " + model.getText().toString() + "\n";
-            else text = "IOS  - " + model.getText().toString() + "\n";
-            text = text + problem.getText().toString() + "\n";
-            text = text + cityName + " " + countryName + " " + stateName + "\n";
+            if (isAndroid) text = "OS: Android - " + model.getText().toString() + "\n";
+            else text = "OS: IOS - " + model.getText().toString() + "\n";
+            text = text +"Problem: " + problem.getText().toString() + "\n";
+            text = text +"Address: " +cityName+"\n";
+            text = text + "Person: " + Global.name + " - "+ Global.phone + "\n";
             String address = "tanya.naidenova@abv.bg";
             locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
@@ -151,109 +168,35 @@ public class SecondForm extends AppCompatActivity implements LocationListener {
                 break;
         }
     }
-    public static boolean isLocationEnabled(Context context) {
-        //...............
-        return true;
-    }
+    protected void getAddress() {
 
-    protected void getLocation() {
-        if (isLocationEnabled(SecondForm.this)) {
-            locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-            criteria = new Criteria();
-            bestProvider = String.valueOf(locationManager.getBestProvider(criteria, true)).toString();
 
-            //You can still do this if you like, you might get lucky:
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return;
-            }
-            Location location = locationManager.getLastKnownLocation(bestProvider);
-            if (location != null) {
+        SharedPreferences prefs = getSharedPreferences("Loc", MODE_PRIVATE);
+
+            Global.lat= Double.parseDouble(prefs.getString("lat",null));
+         Global.lng= Double.parseDouble(prefs.getString("lng",null));
+         Log.e("l",Global.lat + " " + Global.lng);
+
+        if (Global.lng != null && Global.lat != null) {
                 Log.e("TAG", "GPS is on");
-                lat = location.getLatitude();
-                lng = location.getLongitude();
+
                 List<Address> addresses;
                 geocoder = new Geocoder(this, Locale.getDefault());
                 try {
-                    addresses = geocoder.getFromLocation(lat, lng, 1);
+                    addresses = geocoder.getFromLocation(Global.lat, Global.lng, 1);
                     if (addresses.size() > 0) {
                         cityName = addresses.get(0).getAddressLine(0);
-                        stateName = addresses.get(0).getAddressLine(1);
+               //         stateName = addresses.get(0).getAddressLine(1);
                         //Toast.makeText(getApplicationContext(),stateName , 1).show();
-                        countryName = addresses.get(0).getAddressLine(2);
+                 //       countryName = addresses.get(0).getAddressLine(2);
                     }
-                } catch (IOException e) {
+                } catch (IOException e ) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
 
 
-            } else {
-                //This is what you need:
-                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
-                    return;
-                }
-                locationManager.requestLocationUpdates(bestProvider, 1000, 0, this);
             }
         }
-        else
-        {
-            //prompt user to enable location....
-            //.................
-        }
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        locationManager.removeUpdates(this);
-
-    }
-
-    @Override
-    public void onLocationChanged(Location location) {
-        //Hey, a non null location! Sweet!
-
-        //remove location callback:
-        locationManager.removeUpdates(this);
-
-        //open the map:
-        latitude = location.getLatitude();
-        longitude = location.getLongitude();
-        Toast.makeText(SecondForm.this, "latitude:" + latitude + " longitude:" + longitude, Toast.LENGTH_SHORT).show();
-        searchNearestPlace(voice2text);
-    }
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {
-
-    }
-
-    public void searchNearestPlace(String v2txt) {
-        //.....
-    }
-
-}

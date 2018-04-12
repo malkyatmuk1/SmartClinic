@@ -54,7 +54,7 @@
     <EditText
         android:layout_width="266dp"
         android:layout_height="wrap_content"
-        android:inputType="text"
+        android:inputType="textEmailAddress"
         android:layout_gravity="center_horizontal"
         android:id="@+id/email"
         android:textColor="#ffffff"
@@ -80,7 +80,7 @@
         android:theme="@android:style/Theme.Holo.Light"
         android:layout_width="266dp"
         android:layout_height="wrap_content"
-        android:inputType="text"
+        android:inputType="phone"
         android:layout_gravity="center_horizontal"
         android:id="@+id/number"
         android:textColor="#ffffff"
