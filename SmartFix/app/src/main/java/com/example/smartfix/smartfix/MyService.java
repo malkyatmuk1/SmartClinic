@@ -48,8 +48,8 @@ public class MyService extends Service
         @Override
         public void onProviderDisabled(String provider)
         {
-            Intent i = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            startActivity(i);
+
+
             Log.e(TAG, "onProviderDisabled: " + provider);
         }
 
