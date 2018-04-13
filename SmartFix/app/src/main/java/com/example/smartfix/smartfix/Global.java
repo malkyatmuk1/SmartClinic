@@ -10,5 +10,6 @@ public class Global extends Application {
        public static String problem;
        public static Boolean os;
        public static Double lat, lng;
+       public static String address2;
 
 }

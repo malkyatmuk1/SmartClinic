@@ -23,6 +23,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
@@ -43,14 +44,18 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+import static com.example.smartfix.smartfix.Global.address2;
+
 public class SecondForm extends AppCompatActivity{
 
     Boolean isAndroid = false;
     String text;
-    EditText problem, model;
+    EditText problem, model, userLocation;
     RadioGroup radioGroup;
     RadioButton radioButtonAndroid, radioButtonIos;
     LocationManager locationManager;
+
+    CheckBox checkBox;
 
     Double lat, lng;
     String cityName;
@@ -78,6 +83,8 @@ public class SecondForm extends AppCompatActivity{
         radioGroup = (RadioGroup) findViewById(R.id.radio);
         problem = (EditText) findViewById(R.id.problem);
         model = (EditText) findViewById(R.id.model);
+        userLocation = (EditText) findViewById(R.id.custom_address);
+        checkBox = (CheckBox) findViewById(R.id.current_location);
         model.setSelected(false);
         if(Global.problem!=null) problem.setText(Global.problem);
         if(Global.model!=null) model.setText(Global.model);
@@ -87,9 +94,13 @@ public class SecondForm extends AppCompatActivity{
         next.setOnClickListener(emailListener);
         back.setOnClickListener(backListener);
         radioGroup.setOnCheckedChangeListener(radioListener);
+        userLocation.setVisibility(View.GONE);
 
         getAddress();
     }
+
+
+
     View.OnClickListener backListener= new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -108,16 +119,32 @@ public class SecondForm extends AppCompatActivity{
            startActivity(i);
            finish();
         }
+        public boolean customLocation(View view) {
+            boolean enabled = ((CheckBox) view).isChecked();
+            if (enabled = false) {
+                userLocation.setVisibility(View.VISIBLE);
+                Global.address2 = userLocation.getText().toString();
+                return true;
+            } else {
+                return false;
+            }
+
+        }
 
 
     View.OnClickListener emailListener = new View.OnClickListener() {
 
         public void onClick(View view) {
-
             if (isAndroid) text = "OS: Android - " + model.getText().toString() + "\n";
             else text = "OS: IOS - " + model.getText().toString() + "\n";
             text = text +"Problem: " + problem.getText().toString() + "\n";
-            text = text +"Address: " +cityName+"\n";
+            if(customLocation(view))
+            {
+                text = text + "Address: " + Global.address2 +"\n";
+            }
+            else {
+                text = text + "Address: " + cityName + "\n";
+            }
             text = text + "Person: " + Global.name + " - "+ Global.phone + "\n";
             String address = "tanya.naidenova@abv.bg";
             locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -198,5 +225,6 @@ public class SecondForm extends AppCompatActivity{
 
             }
         }
+
     }
 

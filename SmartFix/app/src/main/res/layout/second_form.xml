@@ -149,10 +149,39 @@
                 android:scrollbars="vertical"
                 android:textColor="#ffffff"
                 android:textColorHint="@color/white"
-                android:theme="@android:style/Theme.Holo.Light"
-
-                />
+                android:theme="@android:style/Theme.Holo.Light"/>
         </android.support.design.widget.TextInputLayout>
+
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/usar_localiza_o_atual"
+            android:id="@+id/current_location"
+            />
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:gravity="center_horizontal"
+            android:textColorHint="@color/white">
+
+            <EditText
+
+                android:id="@+id/custom_address"
+                android:layout_width="265dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center_horizontal"
+                android:backgroundTint="#ffffff"
+                android:drawablePadding="10dp"
+                android:hint="@string/endere_o"
+                android:imeOptions="actionNext"
+                android:textColor="#ffffff"
+                android:textColorHint="#ffffff" />
+        </android.support.design.widget.TextInputLayout>
+
+
 
         <Button
             android:id="@+id/button"

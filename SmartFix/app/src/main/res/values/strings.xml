@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SmartFix</string>
+    <string name="usar_localiza_o_atual">Usar localização atual</string>
+    <string name="endere_o">endereço</string>
 </resources>
