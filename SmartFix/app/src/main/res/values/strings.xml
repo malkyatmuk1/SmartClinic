@@ -2,4 +2,20 @@
     <string name="app_name">SmartFix</string>
     <string name="usar_localiza_o_atual">Usar localização atual</string>
     <string name="endere_o">endereço</string>
+    <string name="model">Modelo</string>
+    <string name="os">Sistema Operativo</string>
+    <string name="back">Back</string>
+    <string name="device">Aparelho</string>
+    <string name="android">Android</string>
+    <string name="describe_the_problem">Descreva a avaria ...</string>
+    <string name="send">Enviar</string>
+    <string name="ios">IOS</string>
+    <string name="personal_details">Informação pessoal</string>
+    <string name="name">Nome</string>
+    <string name="email">Email</string>
+    <string name="phone_number">Telefone</string>
+    <string name="next">Seguinte</string>
+    <string name="bem_vindo">Bem-Vindo!</string>
+    <string name="windows">Windows</string>
+    <string name="developedBy">Developed by "\n" Tanya Naydenova and Miroslav Uzunov</string>
 </resources>
