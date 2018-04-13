@@ -15,4 +15,5 @@
     <string name="next">Seguinte</string>
     <string name="bem_vindo">Bem-Vindo!</string>
     <string name="windows">Windows</string>
+    <string name="developedBy">Developed by "\n" Tanya Naydenova and Miroslav Uzunov</string>
 </resources>

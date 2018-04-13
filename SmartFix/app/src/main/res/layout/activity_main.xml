@@ -13,22 +13,23 @@
         android:layout_height="wrap_content"
         android:src="@drawable/logo_blue"
         android:layout_gravity="center_horizontal"
-        android:padding="10sp"
-         />
+        android:padding="10sp" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_centerInParent="true"
         android:text="@string/bem_vindo"
-
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
         android:textSize="50sp"
         android:textColor="@color/black"
-        android:textStyle="bold"
-
-
-        />
-
+        android:textStyle="bold" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/developedBy"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_margin="30sp"
+        android:textColor="@color/grey"
+        android:textSize="12sp" />
 </LinearLayout>

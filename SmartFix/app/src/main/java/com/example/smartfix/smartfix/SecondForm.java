@@ -57,7 +57,7 @@ public class SecondForm extends AppCompatActivity{
     Geocoder geocoder;
     protected static final int REQUEST_CHECK_SETTINGS = 0x1;
     private LocationListener locationListener;
-    private String emailAndroidAndWindows, emailIOS, address;
+    private String emailAndroidAndWindows="info@smartclinic.pt", emailIOS="geral@iloja.pt", address;
 
     Intent intentThatCalled;
     public double latitude;
