@@ -45,7 +45,7 @@ import java.util.Locale;
 
 public class SecondForm extends AppCompatActivity{
 
-    Boolean isAndroid = false;
+    Boolean isAndroid = false,isWindows=false;
     String text;
     EditText problem, model;
     RadioGroup radioGroup;
@@ -57,6 +57,7 @@ public class SecondForm extends AppCompatActivity{
     Geocoder geocoder;
     protected static final int REQUEST_CHECK_SETTINGS = 0x1;
     private LocationListener locationListener;
+    private String emailAndroidAndWindows, emailIOS, address;
 
     Intent intentThatCalled;
     public double latitude;
@@ -115,11 +116,14 @@ public class SecondForm extends AppCompatActivity{
         public void onClick(View view) {
 
             if (isAndroid) text = "OS: Android - " + model.getText().toString() + "\n";
+            else if(isWindows)text = "OS: Windows phone - " + model.getText().toString() + "\n";
             else text = "OS: IOS - " + model.getText().toString() + "\n";
             text = text +"Problem: " + problem.getText().toString() + "\n";
             text = text +"Address: " +cityName+"\n";
             text = text + "Person: " + Global.name + " - "+ Global.phone + "\n";
-            String address = "tanya.naidenova@abv.bg";
+            if(isAndroid || isWindows)
+                 address = emailAndroidAndWindows;
+            else address=emailIOS;
             locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
 

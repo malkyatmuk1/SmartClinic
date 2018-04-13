@@ -33,7 +33,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="40dp"
             android:background="@drawable/back_button"
-            android:text="Back"
+            android:text="@string/back"
             android:theme="@android:style/Theme.Holo.Light" />
 </LinearLayout>
 
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
-            android:text="Device"
+            android:text="@string/device"
             android:textColor="@color/grey"
             android:textSize="40sp"
             android:textStyle="bold"
@@ -73,7 +73,7 @@
                 android:backgroundTint="#ffffff"
                 android:drawableLeft="@drawable/drawableleft_smaller_devices"
                 android:drawablePadding="10dp"
-                android:hint="Model"
+                android:hint="@string/model"
                 android:imeOptions="actionNext"
                 android:textColor="#ffffff"
                 android:textColorHint="#ffffff" />
@@ -84,7 +84,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10sp"
-            android:text="OS"
+            android:text="@string/os"
             android:textColor="@color/grey"
             android:textStyle="italic" />
 
@@ -106,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/drawableleft_smaller_android"
                 android:drawablePadding="10dp"
-                android:text="Android"
+                android:text="@string/android"
                 android:textColor="@color/black"
                 android:theme="@android:style/Theme.Material" />
 
@@ -116,10 +116,21 @@
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/drawableleft_smaller_apple"
                 android:drawablePadding="10dp"
-                android:text="IOS"
+                android:text="@string/ios"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/white"
                 android:theme="@android:style/Theme.Material" />
+            <RadioButton
+                android:id="@+id/radio_windows"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/drawableleft_smaller_windows"
+                android:drawablePadding="10dp"
+                android:text="@string/windows"
+                android:textColor="@color/black"
+                android:textColorHighlight="@color/black"
+                android:theme="@android:style/Theme.Material"
+                />
         </RadioGroup>
 
         <android.support.design.widget.TextInputLayout
@@ -138,7 +149,7 @@
                 android:layout_margin="15sp"
                 android:background="@drawable/border"
                 android:gravity="top|left"
-                android:hint="Describe the problem ..."
+                android:hint="@string/describe_the_problem"
                 android:imeOptions="actionDone"
                 android:inputType="textMultiLine"
                 android:isScrollContainer="true"
@@ -161,7 +172,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@drawable/background_button"
-            android:text="Send"
+            android:text="@string/send"
             android:theme="@android:style/Theme.Holo.Light" />
     </LinearLayout>
 </RelativeLayout>
